@@ -14,7 +14,7 @@ var multer  =   require('multer');
 
 router.get('/getobj', function(req, res, next) {
   var selectedFile = router.selectedobj;
-  if(!selectedobj){
+  if(!selectedFile){
     console.log("no selected obj; defaulting to teapot");
     selectedFile = "teapot.obj";
   }
