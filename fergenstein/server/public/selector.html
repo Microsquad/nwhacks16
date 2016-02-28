@@ -38,7 +38,7 @@
 
 <body >
     
-	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:20px;">
+	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:40px;">
             <div ng-repeat="obj in objs" >
                 <input style="margin: 5px;" type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}" ng-click="previewObj();">{{obj.name}}<br>
             </div>
