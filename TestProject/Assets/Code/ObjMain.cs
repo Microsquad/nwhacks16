@@ -6,32 +6,41 @@ public class ObjMain : MonoBehaviour {
 	public string FolderPath = "";
 	public string ObjectFile = "";
 	public bool LoadLocalModel = false;
+	public Material CustomMaterial;
+
+    public GameObject newObj;
 
 	public string endpoint = "http://104.236.185.75:3000/getobj";
 
 	private WWW www;
+    private WWW www2;
 
 	public IEnumerator getObj() {
-		yield return www;
+
+        yield return www;
 
 		Mesh holderMesh = new Mesh();
 		ObjectImporter newMesh = new ObjectImporter();
+        holderMesh = newMesh.ImportFile(www.text);
 
-		holderMesh = newMesh.ImportFile(www.text);
+        foreach (Transform trans in this.gameObject.transform)
+        {
+            GameObject.Destroy(trans.gameObject);
+        }
 
-        MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
-        MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
-
-        GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Plane);
-		primitive.active = false;
-		Material diffuse = primitive.GetComponent<MeshRenderer>().sharedMaterial;
-		DestroyImmediate(primitive);
-		// ...
-		this.gameObject.GetComponent<Renderer>().sharedMaterial = diffuse;
-
+        GameObject child = Instantiate(newObj);
+        child.transform.parent = this.gameObject.transform;
+                
+        MeshRenderer renderer = child.AddComponent<MeshRenderer>();
+        MeshFilter filter = child.AddComponent<MeshFilter>();       
+		child.GetComponent<Renderer>().sharedMaterial = CustomMaterial;
+ 
         filter.mesh = holderMesh;
 
-        CenterObject();	
+        CenterObject(child);
+
+        
+        
     }
 
 	// Use this for initialization
@@ -44,13 +53,19 @@ public class ObjMain : MonoBehaviour {
 
 	}
 
-	private void CenterObject()
+	private void CenterObject(GameObject child)
     {
-        Vector3 x = this.gameObject.GetComponent<MeshRenderer>().bounds.center;
+        Vector3 x = child.GetComponent<MeshRenderer>().bounds.center;
         Debug.Log(x);
-        this.gameObject.transform.Translate(-x, Space.World);
+       child.transform.Translate(-x, Space.World);
     }
 
+    public void btnClick()
+    {
+        www.Dispose();
+        www = new WWW(endpoint);
+        StartCoroutine(getObj());
+    }
 
 	
 }
