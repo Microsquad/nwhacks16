@@ -2,17 +2,40 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/objs');
+
+var Obj = mongoose.model('obj', { name: String });
+
+
+
 var multer  =   require('multer');
 
 
 router.get('/getobj', function(req, res, next) {
-	fs.readFile('public/doot.obj', 'utf8', function (err,data) {
+  var selectedFile = router.selectedobj;
+  if(!selectedobj){
+    console.log("no selected obj; defaulting to teapot");
+    selectedFile = "teapot.obj";
+  }
+  console.log("attempting to get " + selectedFile);
+	fs.readFile('public/' + selectedFile, 'utf8', function (err,data) {
 	  if (err) {
 	    return console.log(err);
 	  }
 	  res.write(data);
 	  res.end();
 	});
+});
+
+router.get('/getobjs', function(req, res, next) {
+	Obj.find({}, function(err, objs){
+        if(err){
+            console.log(err);
+            res.end("err");
+        }
+        res.send(objs);
+    }); 
 });
 
 
@@ -22,7 +45,15 @@ var storage =   multer.diskStorage({
     callback(null, './');
   },
   filename: function (req, file, callback) {
-    callback(null, "public/doot.obj");
+    var newobj = new Obj({ name: file.originalname });
+    newobj.save(function (err) {
+          if (err){
+            console.log('err saving to db');
+          }
+          console.log('saved to db');
+            callback(null, "public/" + file.originalname);
+    });
+      
   }
 });
 
@@ -38,6 +69,10 @@ router.post('/upl',function(req,res){
     });
 });
 
+router.post('/selectobj',function(req,res){
+  console.log("selected: " + req.body.name);
+  router.selectedobj = req.body.name;
+});
 
 module.exports = router;
              
