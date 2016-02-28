@@ -1,5 +1,6 @@
 var renderer = new THREE.WebGLRenderer();
-renderer.setClearColor(0x000000); // black background colour
+//renderer.setClearColor(0x000000); // black background colour
+renderer.setClearColor(0xffffff);
 document.getElementById("object-container").appendChild(renderer.domElement);
 
 var scene;
@@ -93,7 +94,7 @@ function createScene(fileLoc) {
   scene.add( pointLight );
 
   var lightedMaterial = new THREE.MeshPhongMaterial( {
-    color: 0xffffff,
+    color: 0x000000,
     shininess: 50,
     specular: 0x222222
   });
@@ -103,8 +104,14 @@ function createScene(fileLoc) {
   //loadOBJ('girl.obj', material, 1, 0,0,0, -3.14/2, 0, 3.14);
   if (fileLoc == "BeautifulGirl.obj") {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, -0.825, 0, -3.14/2, 0, 3.14);
-  } else if (fileLoc = "Wood_Table.obj") {
-    loadOBJ(fileLoc, lightedMaterial, 1, 0, 0, 0, 0, 0); 
+  } else if (fileLoc == "Wood_Table.obj") {
+    loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, 0, 0, 0);
+  } else if (fileLoc == "cube.obj") {
+    loadOBJ(fileLoc, lightedMaterial, 1,  -0.5, 0, 0, 0, 0, 0);
+    camera.position.z = 3;
+  } else if (fileLoc == "lowpoyltree.obj") {
+    loadOBJ(fileLoc, lightedMaterial, 1,  0, -2.5, 0, 0, 0, 0);
+    camera.position.z = 3;
   } else {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, 0, 0, 0);
   }
