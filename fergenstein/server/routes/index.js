@@ -6,7 +6,7 @@ var multer  =   require('multer');
 
 
 router.get('/getobj', function(req, res, next) {
-	fs.readFile('teapot.obj', 'utf8', function (err,data) {
+	fs.readFile('public/doot.obj', 'utf8', function (err,data) {
 	  if (err) {
 	    return console.log(err);
 	  }
@@ -22,7 +22,7 @@ var storage =   multer.diskStorage({
     callback(null, './');
   },
   filename: function (req, file, callback) {
-    callback(null, "doot.obj");
+    callback(null, "public/doot.obj");
   }
 });
 
