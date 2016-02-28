@@ -5,7 +5,7 @@
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script>
 
     var objApp = angular.module('objApp', []);
@@ -39,12 +39,19 @@
 <body >
 
   	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:40px; position: absolute; top: 0; bottom: 0; left: 0;">
+
+
               <div ng-repeat="obj in objs" >
                   <input style="margin: 5px;" type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}" ng-click="previewObj();">{{obj.name}}<br>
               </div>
 
               <button ng-click="selectObj()" style="width: 100%; margin: 20px 0px; color:black;">Submit</button>
     </div>
+
+    <div style="position: absolute; left: 0;  bottom: 0; z-index: 99;">
+      <a href="#" onclick="window.history.back();"><i class="fa fa-arrow-circle-left fa-4x"></i></a>
+    </div>
+              
 
     <div id="object-container" style="width: 50%; display: inline-block;"></div>
 
