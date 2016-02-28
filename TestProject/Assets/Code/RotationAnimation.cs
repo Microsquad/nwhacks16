@@ -7,9 +7,15 @@ public class RotationAnimation : MonoBehaviour {
     
     void Start()
     {
-        Vector3 x = this.gameObject.GetComponent<Renderer>().bounds.center;
+        
+    }
+
+    public void CenterObject()
+    {
+        Vector3 x = this.gameObject.GetComponent<MeshRenderer>().bounds.center;
         this.gameObject.transform.Translate(-x);
     }
+
 	// Update is called once per frame
 	void Update () {
         

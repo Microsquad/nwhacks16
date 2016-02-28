@@ -45,8 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Code\CameraControls.cs" />
      <Compile Include="Assets\Code\ObjMain.cs" />
      <Compile Include="Assets\Code\ObjectImporter.cs" />
+     <Compile Include="Assets\Code\RotationAnimation.cs" />
+     <None Include="Assets\3dmodel\cubetext.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

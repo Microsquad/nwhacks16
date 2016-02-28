@@ -3,11 +3,13 @@ using System.Collections;
 
 public class ObjMain : MonoBehaviour {
 
+	public string Path = "";
+
 	// Use this for initialization
 	void Start () {
 		Mesh holderMesh = new Mesh();
         ObjectImporter newMesh = new ObjectImporter();
-        holderMesh = newMesh.ImportFile("D:/Personal_Data/Projects/Unity/3dtest/nwhacks16/TestProject/Assets/3dmodel/BeautifulGirl.obj");
+        holderMesh = newMesh.ImportFile(Path);
 
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
@@ -20,6 +22,8 @@ public class ObjMain : MonoBehaviour {
 		this.gameObject.GetComponent<Renderer>().sharedMaterial = diffuse;
 
         filter.mesh = holderMesh;
+
+        this.gameObject.GetComponent<RotationAnimation>().CenterObject();
 	}
 	
 }
