@@ -5,52 +5,48 @@
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
-    
-    <script>    
-    
+
+    <script>
+
     var objApp = angular.module('objApp', []);
-    
-    
+
+
     objApp.controller('ObjsController', ['$scope', '$http', function ($scope, $http)     {
-        
+
         $http.get("getobjs")
         .then(function(response) {
             $scope.objs = response.data;
         });
-        
+
         $scope.selectObj = function(){
             var data = {
                     name: $scope.selectedObj
             };
-            
+
             $http.post("/selectobj", data).success(function(data, status) {
                 alert(data);
             })
         }
-        
+
         $scope.previewObj = function(){
-            createScene($scope.selectedObj);   
+            createScene($scope.selectedObj);
         }
     }]);
 </script>
-    
+
 </head>
 
 <body >
-    
-	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:40px;">
-            <div ng-repeat="obj in objs" >
-                <input style="margin: 5px;" type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}" ng-click="previewObj();">{{obj.name}}<br>
-            </div>
-        
-            <button ng-click="selectObj()" style="width: 100%; margin: 20px 0px; color:black;">Submit</button>
-        
+
+  	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:40px; position: absolute; top: 0; bottom: 0; left: 0;">
+              <div ng-repeat="obj in objs" >
+                  <input style="margin: 5px;" type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}" ng-click="previewObj();">{{obj.name}}<br>
+              </div>
+
+              <button ng-click="selectObj()" style="width: 100%; margin: 20px 0px; color:black;">Submit</button>
     </div>
-    
-    <div id="object-container" style="width: 50%; display: inline-block;">
-    </div>
-    
-    
+
+    <div id="object-container" style="width: 50%; display: inline-block;"></div>
 
   <script src="threejs/three.min.js"></script>
   <script src="threejs/OBJLoader.js"></script>
@@ -60,4 +56,3 @@
   <script src="threejs/select.js"></script>
 
 </body>
-    

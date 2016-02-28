@@ -1,27 +1,24 @@
-//var container = document.getElementById( "object-container" );
-
-//renderer.domElement = container;
 var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0x000000); // black background colour
 document.getElementById("object-container").appendChild(renderer.domElement);
-//document.body.appendChild(renderer.domElement);
 
 var scene;
 var camera;
 
-createScene('girl.obj');
+createScene('BeautifulGirl.obj');
 
 function createScene(fileLoc) {
   scene = new THREE.Scene();
 
-  // var worldFrame = new THREE.AxisHelper(5) ;
-  // scene.add(worldFrame);
+  //var worldFrame = new THREE.AxisHelper(5) ;
+  //scene.add(worldFrame);
 
-  camera = new THREE.PerspectiveCamera( 60, 1, 1, 10);
+  camera = new THREE.PerspectiveCamera( 70, 1, 1, 10);
+  //camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 100);
   camera.position.x = 0;
-  camera.position.z = 2;
-  camera.position.y = 3;
-  camera.lookAt(0, -1, 0);
+  camera.position.z = 1.5;
+  camera.position.y = 0;
+  camera.lookAt(scene.position);
   scene.add(camera);
 
   // SETUP ORBIT CONTROL OF THE CAMERA
@@ -86,13 +83,12 @@ function createScene(fileLoc) {
     pointLight.add( sphere );
 
     return pointLight
-
   }
 
   pointLight = createLight( 0xffffff );
   pointLight.position.x = 0;
-  pointLight.position.y = 2;
-  pointLight.position.z = 3;
+  pointLight.position.y = 1.5;
+  pointLight.position.z = 2.5;
   scene.add( pointLight );
 
   var lightedMaterial = new THREE.MeshPhongMaterial( {
@@ -104,7 +100,11 @@ function createScene(fileLoc) {
   //var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
   //loadOBJ('girl.obj', material, 1, 0,0,0, -3.14/2, 0, 3.14);
-  loadOBJ(fileLoc, lightedMaterial, 1, 0,0,0, -3.14/2, 0, 3.14);
+  if (fileLoc == "BeautifulGirl.obj") {
+    loadOBJ(fileLoc, lightedMaterial, 1,  0, -0.825, 0, -3.14/2, 0, 3.14);
+  } else {
+    loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, -3.14/2, 0, 3.14);
+  }
 }
 
 function update() {
