@@ -6,6 +6,7 @@ public class ObjMain : MonoBehaviour {
 	public string FolderPath = "";
 	public string ObjectFile = "";
 	public bool LoadLocalModel = false;
+	public Material CustomMaterial;
 
 	public string endpoint = "http://104.236.185.75:3000/getobj";
 
@@ -22,12 +23,9 @@ public class ObjMain : MonoBehaviour {
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
 
-        GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Plane);
-		primitive.active = false;
-		Material diffuse = primitive.GetComponent<MeshRenderer>().sharedMaterial;
-		DestroyImmediate(primitive);
+
 		// ...
-		this.gameObject.GetComponent<Renderer>().sharedMaterial = diffuse;
+		this.gameObject.GetComponent<Renderer>().sharedMaterial = CustomMaterial;
 
         filter.mesh = holderMesh;
 
