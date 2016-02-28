@@ -21,11 +21,10 @@ public class ObjectImporter : MonoBehaviour {
     }
  
     // Use this for initialization
-	public Mesh ImportFile (string filePath) 
+	public Mesh ImportFile (string entireText) 
     {
-        string entireText = getModelString(filePath);
-        meshStruct newMesh = createMeshStruct(entireText, filePath);
-        populateMeshStruct(ref newMesh);
+        meshStruct newMesh = createMeshStruct(entireText);
+        populateMeshStruct(ref newMesh, entireText);
  
         Vector3[] newVerts = new Vector3[newMesh.faceData.Length];
         Vector2[] newUVs = new Vector2[newMesh.faceData.Length];
@@ -66,7 +65,7 @@ public class ObjectImporter : MonoBehaviour {
         return entireText;
     }
  
-    private static meshStruct createMeshStruct(string entireText, string name)
+    private static meshStruct createMeshStruct(string entireText, string name = "alphaOmega")
     {
         int triangles = 0;
         int vertices = 0;
@@ -130,11 +129,12 @@ public class ObjectImporter : MonoBehaviour {
         return mesh;
     }
  
-    private static void populateMeshStruct(ref meshStruct mesh)
+    private static void populateMeshStruct(ref meshStruct mesh, string entireText)
     {
-        StreamReader stream = File.OpenText(mesh.fileName);
-        string entireText = stream.ReadToEnd();
-        stream.Close();
+        //StreamReader stream = File.OpenText(mesh.fileName);
+        //string entireText = stream.ReadToEnd();
+        //stream.Close();
+
         using (StringReader reader = new StringReader(entireText))
         {
             string currentText = reader.ReadLine();

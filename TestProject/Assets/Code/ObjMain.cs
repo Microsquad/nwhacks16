@@ -7,20 +7,17 @@ public class ObjMain : MonoBehaviour {
 	public string ObjectFile = "";
 	public bool LoadLocalModel = false;
 
-	// Use this for initialization
-	void Start () {
+	public string endpoint = "http://104.236.185.75:3000/getobj";
 
-		if(LoadLocalModel) return; //skip all loading
+	private WWW www;
+
+	public IEnumerator getObj() {
+		yield return www;
 
 		Mesh holderMesh = new Mesh();
-        ObjectImporter newMesh = new ObjectImporter();
-        string systemPath = Application.streamingAssetsPath;
-        if(systemPath[systemPath.Length - 1] != '/')
-        {
-        	systemPath += '/';
-        }
-        string fullPath = systemPath + FolderPath + ObjectFile; 
-        holderMesh = newMesh.ImportFile(FolderPath+ObjectFile);
+		ObjectImporter newMesh = new ObjectImporter();
+
+		holderMesh = newMesh.ImportFile(www.text);
 
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
@@ -34,7 +31,17 @@ public class ObjMain : MonoBehaviour {
 
         filter.mesh = holderMesh;
 
-        CenterObject();
+        CenterObject();	
+    }
+
+	// Use this for initialization
+	void Start () {
+
+		if(LoadLocalModel) return; //skip all loading
+
+        www = new WWW(endpoint);
+		StartCoroutine (getObj ());
+
 	}
 
 	private void CenterObject()
@@ -43,5 +50,7 @@ public class ObjMain : MonoBehaviour {
         Debug.Log(x);
         this.gameObject.transform.Translate(-x, Space.World);
     }
+
+
 	
 }
