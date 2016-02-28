@@ -72,6 +72,7 @@ router.post('/upl',function(req,res){
 router.post('/selectobj',function(req,res){
   console.log("selected: " + req.body.name);
   router.selectedobj = req.body.name;
+  res.end("success");
 });
 
 module.exports = router;

@@ -12,35 +12,52 @@
     
     
     objApp.controller('ObjsController', ['$scope', '$http', function ($scope, $http)     {
+        
         $http.get("getobjs")
         .then(function(response) {
             $scope.objs = response.data;
         });
         
         $scope.selectObj = function(){
-                    var data = {
-                            name: $scope.selectedObj
-                    };
-                    $http.post("/selectobj", data).success(function(data, status) {
-                    })
-            }
+            var data = {
+                    name: $scope.selectedObj
+            };
+            
+            $http.post("/selectobj", data).success(function(data, status) {
+                alert(data);
+            })
+        }
+        
+        $scope.previewObj = function(){
+            createScene($scope.selectedObj);   
+        }
     }]);
 </script>
     
 </head>
 
 <body >
-	<div style="container" ng-controller="ObjsController">
-            
-        
+    
+	<div ng-controller="ObjsController" style="display: inline-block;float:left; padding:20px;">
             <div ng-repeat="obj in objs" >
-                <input type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}">{{obj.name}}<br>
+                <input style="margin: 5px;" type="radio" name="obj" ng-model="$parent.selectedObj" value="{{obj.name}}" ng-click="previewObj();">{{obj.name}}<br>
             </div>
         
-            <button ng-click="selectObj()">Submit</button>
-            
-            
+            <button ng-click="selectObj()" style="width: 100%; margin: 20px 0px; color:black;">Submit</button>
+        
     </div>
+    
+    <div id="object-container" style="width: 50%; display: inline-block;">
+    </div>
+    
+    
+
+  <script src="threejs/three.min.js"></script>
+  <script src="threejs/OBJLoader.js"></script>
+  <script src="threejs/SourceLoader.js"></script>
+  <script src="threejs/OrbitControls.js"></script>
+  <script src="threejs/KeyboardState.js"></script>
+  <script src="threejs/select.js"></script>
 
 </body>
     

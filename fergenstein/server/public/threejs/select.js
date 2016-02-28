@@ -1,6 +1,5 @@
 //var container = document.getElementById( "object-container" );
 
-var renderer = new THREE.WebGLRenderer();
 //renderer.domElement = container;
 var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0x000000); // black background colour
@@ -10,9 +9,9 @@ document.getElementById("object-container").appendChild(renderer.domElement);
 var scene;
 var camera;
 
-createScene();
+createScene('girl.obj');
 
-function createScene() {
+function createScene(fileLoc) {
   scene = new THREE.Scene();
 
   // var worldFrame = new THREE.AxisHelper(5) ;
@@ -105,7 +104,7 @@ function createScene() {
   //var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
   //loadOBJ('girl.obj', material, 1, 0,0,0, -3.14/2, 0, 3.14);
-  loadOBJ('girl.obj', lightedMaterial, 1, 0,0,0, -3.14/2, 0, 3.14);
+  loadOBJ(fileLoc, lightedMaterial, 1, 0,0,0, -3.14/2, 0, 3.14);
 }
 
 function update() {
