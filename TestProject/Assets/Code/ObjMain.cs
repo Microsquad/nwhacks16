@@ -7,10 +7,18 @@ public class ObjMain : MonoBehaviour {
 	void Start () {
 		Mesh holderMesh = new Mesh();
         ObjectImporter newMesh = new ObjectImporter();
-        holderMesh = newMesh.ImportFile("D:/Personal_Data/Projects/Unity/3dtest/nwhacks16/TestProject/Assets/3dmodel/teapot.obj");
+        holderMesh = newMesh.ImportFile("D:/Personal_Data/Projects/Unity/3dtest/nwhacks16/TestProject/Assets/3dmodel/BeautifulGirl.obj");
 
-        MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
-        MeshFilter filter = gameObject.AddComponent<MeshFilter>();
+        MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
+        MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
+
+        GameObject primitive = GameObject.CreatePrimitive(PrimitiveType.Plane);
+		primitive.active = false;
+		Material diffuse = primitive.GetComponent<MeshRenderer>().sharedMaterial;
+		DestroyImmediate(primitive);
+		// ...
+		this.gameObject.GetComponent<Renderer>().sharedMaterial = diffuse;
+
         filter.mesh = holderMesh;
 	}
 	
