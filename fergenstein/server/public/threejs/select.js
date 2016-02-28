@@ -10,8 +10,8 @@ createScene('BeautifulGirl.obj');
 function createScene(fileLoc) {
   scene = new THREE.Scene();
 
-  //var worldFrame = new THREE.AxisHelper(5) ;
-  //scene.add(worldFrame);
+  var worldFrame = new THREE.AxisHelper(5) ;
+  scene.add(worldFrame);
 
   camera = new THREE.PerspectiveCamera( 70, 1, 1, 10);
   //camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 100);
@@ -24,7 +24,7 @@ function createScene(fileLoc) {
   // SETUP ORBIT CONTROL OF THE CAMERA
   var controls = new THREE.OrbitControls(camera);
   controls.damping = 0.2;
-  controls.noZoom = true;
+  //controls.noZoom = true;
 
   // ADAPT TO WINDOW RESIZE
   function resize() {
@@ -70,10 +70,10 @@ function createScene(fileLoc) {
 
   function createLight( color ) {
 
-    var pointLight = new THREE.PointLight( color, 1, 30 );
+    var pointLight = new THREE.PointLight( color, 1, 1000);
     pointLight.castShadow = true;
     pointLight.shadowCameraNear = 1;
-    pointLight.shadowCameraFar = 30;
+    pointLight.shadowCameraFar = 100;
     // pointLight.shadowCameraVisible = true;
     pointLight.shadowBias = 0.01;
 
@@ -86,9 +86,10 @@ function createScene(fileLoc) {
   }
 
   pointLight = createLight( 0xffffff );
+  // x = 0, y = 1.5, z = 2.5
   pointLight.position.x = 0;
-  pointLight.position.y = 1.5;
-  pointLight.position.z = 2.5;
+  pointLight.position.y = 50;
+  pointLight.position.z = 50;
   scene.add( pointLight );
 
   var lightedMaterial = new THREE.MeshPhongMaterial( {
@@ -102,8 +103,10 @@ function createScene(fileLoc) {
   //loadOBJ('girl.obj', material, 1, 0,0,0, -3.14/2, 0, 3.14);
   if (fileLoc == "BeautifulGirl.obj") {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, -0.825, 0, -3.14/2, 0, 3.14);
+  } else if (fileLoc = "Wood_Table.obj") {
+    loadOBJ(fileLoc, lightedMaterial, 1, 0, 0, 0, 0, 0); 
   } else {
-    loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, -3.14/2, 0, 3.14);
+    loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, 0, 0, 0);
   }
 }
 
