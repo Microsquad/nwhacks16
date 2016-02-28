@@ -40,7 +40,8 @@ public class ObjMain : MonoBehaviour {
 	private void CenterObject()
     {
         Vector3 x = this.gameObject.GetComponent<MeshRenderer>().bounds.center;
-        this.gameObject.transform.Translate(-x);
+        Debug.Log(x);
+        this.gameObject.transform.Translate(-x, Space.World);
     }
 	
 }
