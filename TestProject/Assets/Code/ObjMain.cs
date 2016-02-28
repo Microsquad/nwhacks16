@@ -3,13 +3,14 @@ using System.Collections;
 
 public class ObjMain : MonoBehaviour {
 
-	public string Path = "";
+	public string FolderPath = "";
+	public string ObjectFile = "";
 
 	// Use this for initialization
 	void Start () {
 		Mesh holderMesh = new Mesh();
         ObjectImporter newMesh = new ObjectImporter();
-        holderMesh = newMesh.ImportFile(Path);
+        holderMesh = newMesh.ImportFile(FolderPath+ObjectFile);
 
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         MeshFilter filter = this.gameObject.AddComponent<MeshFilter>();
@@ -23,7 +24,13 @@ public class ObjMain : MonoBehaviour {
 
         filter.mesh = holderMesh;
 
-        this.gameObject.GetComponent<RotationAnimation>().CenterObject();
+        CenterObject();
 	}
+
+	private void CenterObject()
+    {
+        Vector3 x = this.gameObject.GetComponent<MeshRenderer>().bounds.center;
+        this.gameObject.transform.Translate(-x);
+    }
 	
 }
