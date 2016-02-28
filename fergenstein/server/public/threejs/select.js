@@ -1,6 +1,6 @@
 var renderer = new THREE.WebGLRenderer();
-//renderer.setClearColor(0x000000); // black background colour
-renderer.setClearColor(0xffffff);
+renderer.setClearColor(0x000000); // black background colour
+//renderer.setClearColor(0xffffff);
 document.getElementById("object-container").appendChild(renderer.domElement);
 
 var scene;
@@ -11,8 +11,8 @@ createScene('BeautifulGirl.obj');
 function createScene(fileLoc) {
   scene = new THREE.Scene();
 
-  var worldFrame = new THREE.AxisHelper(5) ;
-  scene.add(worldFrame);
+  //var worldFrame = new THREE.AxisHelper(5) ;
+  //scene.add(worldFrame);
 
   camera = new THREE.PerspectiveCamera( 70, 1, 1, 10);
   //camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 100);
@@ -21,6 +21,12 @@ function createScene(fileLoc) {
   camera.position.y = 0;
   camera.lookAt(scene.position);
   scene.add(camera);
+
+  //var geometry = new THREE.PlaneGeometry(500, 1, 50, 1);
+  //var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
+  //var plane = new THREE.Mesh( geometry, material );
+  //plane.receiveShadow = true;
+  //scene.add(plane);
 
   // SETUP ORBIT CONTROL OF THE CAMERA
   var controls = new THREE.OrbitControls(camera);
@@ -88,13 +94,13 @@ function createScene(fileLoc) {
 
   pointLight = createLight( 0xffffff );
   // x = 0, y = 1.5, z = 2.5
-  pointLight.position.x = 0;
+  pointLight.position.x = 25;
   pointLight.position.y = 50;
   pointLight.position.z = 50;
   scene.add( pointLight );
 
   var lightedMaterial = new THREE.MeshPhongMaterial( {
-    color: 0x000000,
+    color: 0xffffff,
     shininess: 50,
     specular: 0x222222
   });
