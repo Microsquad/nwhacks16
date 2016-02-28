@@ -22,11 +22,15 @@ function createScene(fileLoc) {
   camera.lookAt(scene.position);
   scene.add(camera);
 
-  //var geometry = new THREE.PlaneGeometry(500, 1, 50, 1);
-  //var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
-  //var plane = new THREE.Mesh( geometry, material );
-  //plane.receiveShadow = true;
-  //scene.add(plane);
+  var geometry = new THREE.PlaneGeometry(500, 1, 50, 1);
+  var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
+  var plane = new THREE.Mesh( geometry, material );
+  plane.receiveShadow = true;
+  plane.position.x = 0;
+  plane.position.y = 0;
+  plane.position.z = 0;
+  plane.rotation.x = 1.57;
+  scene.add(plane);
 
   // SETUP ORBIT CONTROL OF THE CAMERA
   var controls = new THREE.OrbitControls(camera);
@@ -110,6 +114,7 @@ function createScene(fileLoc) {
   //loadOBJ('girl.obj', material, 1, 0,0,0, -3.14/2, 0, 3.14);
   if (fileLoc == "BeautifulGirl.obj") {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, -0.825, 0, -3.14/2, 0, 3.14);
+    plane.position.y -= 0.825;
   } else if (fileLoc == "Wood_Table.obj") {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, 0, 0, 0);
   } else if (fileLoc == "cube.obj") {
@@ -118,6 +123,7 @@ function createScene(fileLoc) {
   } else if (fileLoc == "lowpoyltree.obj") {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, -2.5, 0, 0, 0, 0);
     camera.position.z = 3;
+    plane.position.y -= 2.5;
   } else {
     loadOBJ(fileLoc, lightedMaterial, 1,  0, 0, 0, 0, 0, 0);
   }
