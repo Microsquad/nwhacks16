@@ -1,6 +1,6 @@
 # Visualiz3d Studio by Microsquad
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FQKSJuNr7XQ" frameborder="0" allowfullscreen></iframe>
+[![IMAGE ALT TEXT](http://i.imgur.com/dFW4cOr.png)](http://www.youtube.com/watch?v=FQKSJuNr7XQ "Visualiz3d Studio by Microsquad")
 
 Stream 3D objects to your devices and see them in a hologram instantaneously!
 
